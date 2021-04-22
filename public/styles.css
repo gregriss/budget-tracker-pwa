@@ -3,12 +3,16 @@ body {
   font-family: sans-serif;
 }
 
+header {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 4fr;
+}
+
 button, input {
   font-size: 100%;
   margin: 5px 0;
   padding: 5px;
-  /* border: 1px black solid;
-  border-radius: 5px; */
 }
 
 table {
@@ -39,12 +43,14 @@ tr:nth-child(even) {
 
 .total {
   font-size: 150%;
+  text-align: right;
   /* text-decoration: underline; */
   padding: 0.5rem;
+  grid-template-areas: 1 / 2 / 2 / 6;
 }
 
 .form {
-  margin-top: 25px;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -56,6 +62,13 @@ tr:nth-child(even) {
   margin: 0 auto;
 }
 
+#icon-img {
+  height: 72px;
+  margin: 0;
+  text-align: right;
+  grid-template-areas: 1 / 1 / 2 / 2;
+}
+
 #total {
   text-decoration: underline;
 }
@@ -64,12 +77,14 @@ tr:nth-child(even) {
   body {
     margin: 0 auto;
   }
-
+  .total {
+    font-size: 135%;
+  }
   .form {
     display: grid;
     place-items: center;
     grid-template: 1fr 1fr / 1fr 1fr;
-    margin: 20px 5px 5px 5px;
+    margin: 10px 5px 5px 5px;
     width: 95%;
   }
 
@@ -83,5 +98,9 @@ tr:nth-child(even) {
 
   button {
     width: 98%;
+  }
+
+  #icon-img {
+    height: 52px;
   }
 }
