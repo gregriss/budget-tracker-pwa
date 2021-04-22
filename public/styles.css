@@ -15,6 +15,11 @@ button, input {
   padding: 5px;
 }
 
+button {
+  background-color: hsl(240, 100%, 70%);
+  color: #f5f5f5;
+}
+
 table {
   width: 100%;
 }
@@ -25,8 +30,12 @@ td, th {
   padding: 8px;
 }
 
+th {
+  background-color: hsl(230, 100%, 85%);
+}
+
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: hsl(210, 90%, 85%);
 }
 
 .error {
@@ -44,7 +53,8 @@ tr:nth-child(even) {
 .total {
   font-size: 150%;
   text-align: right;
-  /* text-decoration: underline; */
+  margin-right: 5px;
+  color: hsl(240, 100%, 30%);
   padding: 0.5rem;
   grid-template-areas: 1 / 2 / 2 / 6;
 }
@@ -61,11 +71,12 @@ tr:nth-child(even) {
   width: 90%;
   margin: 0 auto;
 }
-
+/* #icon-fig {
+  border: 1px solid black;
+} */
 #icon-img {
-  height: 72px;
+  height: 84px;
   margin: 0;
-  text-align: right;
   grid-template-areas: 1 / 1 / 2 / 2;
 }
 
