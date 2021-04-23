@@ -4,6 +4,7 @@ const FILES_TO_CACHE = [
     "/",
     "/index.html",
     "/index.js",
+    "/styles.css",
     "/manifest.webmanifest",
     "/icons/icon-192x192.png",
     "/icons/icon-512x512.png"
@@ -11,7 +12,7 @@ const FILES_TO_CACHE = [
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
-
+const TRANSACTION_CACHE = "transaction-cache-v1";
 // install
 self.addEventListener("install", function(evt) {
     evt.waitUntil(
@@ -23,9 +24,12 @@ self.addEventListener("install", function(evt) {
   
     self.skipWaiting();
   });
-  
+  // runs when serviceWorker is first started...
+  // removes old cache version keys
+  // (this can stay the same for this assignment)
   self.addEventListener("activate", function(evt) {
     evt.waitUntil(
+      // caches.keys() returns all keys for cache versions
       caches.keys().then(keyList => {
         return Promise.all(
           keyList.map(key => {
@@ -41,38 +45,95 @@ self.addEventListener("install", function(evt) {
     self.clients.claim();
   });
 
-// fetch 
+  // fetch
 self.addEventListener("fetch", function(evt) {
-    // cache successful requests to the API
-    if (evt.request.url.includes("/api/")) {
-      evt.respondWith(
-        caches.open(DATA_CACHE_NAME).then(cache => {
-          return fetch(evt.request)
-            .then(response => {
-              // If the response was good, clone it and store it in the cache.
-              if (response.status === 200) {
-                cache.put(evt.request.url, response.clone());
-              }
-              return response;
-            })
-            .catch(err => {
-              // Network request failed, try to get it from the cache.
-              return cache.match(evt.request);
-            });
-        }).catch(err => console.log(err))
-      );
-  
-      return;
-    }
-  
-    // if the request is not for the API, serve static assets using "offline-first" approach.
-    // see https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook#cache-falling-back-to-network
+  // cache successful requests to the API
+  if( evt.request.url.includes("/api/posts")){
     evt.respondWith(
-      caches.match(evt.request).then(function(response) {
-        return response || fetch(evt.request);
+      caches.open(TRANSACTION_CACHE).then(cache => {
+        return Promise.all(
+          //fetch each thing inside the cache,
+          // then clear it if we are online
+        );
       })
+    )
+  }
+  if (evt.request.url.includes("/api/")) {
+    evt.respondWith(
+      caches.open(DATA_CACHE_NAME).then(cache => {
+        return fetch(evt.request)
+          .then(response => {
+            // If the response was good, clone it and store it in the cache.
+            if (response.status === 200) {
+              // we are online
+              //
+              // cache.put(evt.request.url, response.clone());
+            }
+            return response;
+          })
+          .catch(err => {
+            // Network request failed, try to get it from the cache.
+            // we are offline
+            console.log(evt.request.url);
+            console.log(evt.request);
+            // storing a clone of the request in the cache
+            cache.put(evt.request.url, evt.request.clone());
+            return cache.match(evt.request);
+          });
+      }).catch(err => console.log(err))
     );
-  });
+    return;
+  }
+  // if the request is not for the API, serve static assets using "offline-first" approach.
+  // if file not added to cache upon installation, files can be added to cache in this function
+  // see https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook#cache-falling-back-to-network
+  evt.respondWith(
+    caches.match(evt.request).then(function(response) {
+      return response || fetch(evt.request);
+    })
+  );
+});
 
+// // fetch 
+// self.addEventListener("fetch", function(evt) {
+//     // cache successful requests to the API
+//     if (evt.request.url.includes("/api/posts")) {
+//       evt.respondWith(
+//         caches.open(TRANSACTION_NAME).then(cache => {
+//           // return fetch(evt.request)
+//           return Promise.all(
+//             // fetch each thing inside the cache
+//             // thenclear it if we are online
+//           );
+//             .then(response => {
 
-
+//               // If the response was good, clone it and store it in the cache.
+//               if (response.status === 200) {
+//                 // we're online in this case
+//                 cache.put(evt.request.url, response.clone());
+//               }
+//               return response;
+//             })
+//             .catch(err => {
+//               // Network request failed, try to get it from the cache.
+//               // we are offline
+//               console.log(evt.request.url);
+//               console.log(evt.request);
+//               cache.put(evt.request.url, evt.request.clone());
+//               return cache.match(evt.request);
+//             });
+//         }).catch(err => console.log(err))
+//       );
+  
+//       return;
+//     }
+  
+//     // if the request is not for the API, serve static assets using "offline-first" approach.
+//     // if file not added to cache upon installation, files can be added to cache in this function
+//     // see https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook#cache-falling-back-to-network
+//     evt.respondWith(
+//       caches.match(evt.request).then(function(response) {
+//         return response || fetch(evt.request);
+//       })
+//     );
+//   });
