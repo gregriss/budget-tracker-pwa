@@ -1,12 +1,13 @@
 body {
   font-size: 120%;
-  font-family: 'Catamaran', sans-serif;
+  /* font-family: 'Catamaran', sans-serif; */
+  font-family: 'Trebuchet MS';
 }
 
 header {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 5fr;
 }
 
 button, input {
@@ -18,7 +19,8 @@ button, input {
 
 button {
   background-color: hsl(240, 100%, 67%);
-  color: hsl(0, 0%, 96%);
+  /* color: hsl(0, 0%, 96%); */
+  color: white;
 }
 
 table {
@@ -57,12 +59,12 @@ tr:nth-child(even) {
 
 .total {
   font-size: 150%;
-  font-weight: 700;
+  font-weight: 900;
   text-align: right;
   margin-right: 5px;
   color: hsl(240, 100%, 30%);
   padding: 1rem 0.2rem;
-  grid-template-areas: 1 / 2 / 2 / 6;
+  grid-template-areas: 1 / 2 / 2 / 7;
 }
 
 .form {
@@ -97,7 +99,8 @@ tr:nth-child(even) {
     margin: 0 auto;
   }
   .total {
-    font-size: 135%;
+    font-size: 130%;
+    padding: 1rem 0;
   }
   .form {
     display: grid;
@@ -120,6 +123,7 @@ tr:nth-child(even) {
   }
 
   #icon-img {
-    height: 52px;
+    height: 72px;
+    align-self: center;
   }
 }
