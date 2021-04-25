@@ -6,8 +6,8 @@ const FILES_TO_CACHE = [
   "/index.js",
   "/styles.css",
   "/manifest.webmanifest",
-  "/icons/icon-192x192.png",
-  "/icons/icon-512x512.png"
+  "/assets/icons/icon-192x192.png",
+  "/assets/icons/icon-512x512.png"
 ]
 
 const CACHE_NAME = "static-cache-v2";
@@ -125,7 +125,6 @@ self.addEventListener("fetch", (evt) => {
 //             // thenclear it if we are online
 //           );
 //             .then(response => {
-
 //               // If the response was good, clone it and store it in the cache.
 //               if (response.status === 200) {
 //                 // we're online in this case
@@ -143,10 +142,8 @@ self.addEventListener("fetch", (evt) => {
 //             });
 //         }).catch(err => console.log(err))
 //       );
-
 //       return;
 //     }
-
 //     // if the request is not for the API, serve static assets using "offline-first" approach.
 //     // if file not added to cache upon installation, files can be added to cache in this function
 //     // see https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook#cache-falling-back-to-network

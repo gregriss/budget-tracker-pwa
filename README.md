@@ -3,9 +3,9 @@
 
 Track  Deposits and Expenses Online or Offline
 
-Add functionality to our existing Budget Tracker application to allow for offline access and functionality.
+This Budget Tracker application allows for offline access and functionality.
 
-The user will be able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they should populate the total when brought back online.
+The user can add expenses and deposits to their budget with or without a connection. 
 
 Offline Functionality:
 
@@ -52,12 +52,14 @@ I WANT to be able to track my withdrawals and deposits with or without a data/in
 SO THAT my account balance is accurate when I am traveling  
 
 ## Usage  
-Enter transaction names/amounts in the input fields, and select the corresponding button to Add Funds or Subtract Funds. A table is created with a list of transactions, and your total Budget is displayed at the top of the page. There is also a chart depicting your budget trend. 
+Enter transaction names/amounts in the input fields, and select the corresponding button to Add Funds or Subtract Funds. A table is created with a list of transactions, and your total Budget is displayed at the top of the page. There is also a chart depicting your budget trend.  
+[--Deployed Application--](https://shielded-reaches-98709.herokuapp.com/)  
+![Screenshot](public/assets/screenshot.png)
 
 ## License  
-View the full License [here](./LICENSE)  
+View the full MIT License [here](./LICENSE)  
 
 ## Questions  
 Feel free to contact me with any questions:
-[GitHub Repo](https://github.com/gregriss/budget-tracker-pwa)
+[GitHub Repo](https://github.com/gregriss/budget-tracker-pwa)  
 [Email me](mailto:gregriss23@gmail.com)
