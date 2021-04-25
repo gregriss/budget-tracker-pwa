@@ -1,4 +1,4 @@
-console.log("This is your service worker speaking!");
+// console.log("This is your service worker speaking!");
 
 const FILES_TO_CACHE = [
     "/",
@@ -12,9 +12,11 @@ const FILES_TO_CACHE = [
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
-const TRANSACTION_CACHE = "transaction-cache-v1";
+// const TRANSACTION_CACHE = "transaction-cache-v1";
+
 // install
-self.addEventListener("install", function(evt) {
+self.addEventListener("install", (evt) => {
+    console.log('logging [Service Worker] Install');
     evt.waitUntil(
       caches.open(CACHE_NAME).then(cache => {
         console.log("Your files were pre-cached successfully!");
@@ -27,7 +29,7 @@ self.addEventListener("install", function(evt) {
   // runs when serviceWorker is first started...
   // removes old cache version keys
   // (this can stay the same for this assignment)
-  self.addEventListener("activate", function(evt) {
+  self.addEventListener("activate", (evt) => {
     evt.waitUntil(
       // caches.keys() returns all keys for cache versions
       caches.keys().then(keyList => {
@@ -46,11 +48,12 @@ self.addEventListener("install", function(evt) {
   });
 
   // fetch
-self.addEventListener("fetch", function(evt) {
+self.addEventListener("fetch", (evt) => {
   // cache successful requests to the API
+  console.log(`[Service Worker] Fetched resource ${evt.request.url}`);
   if( evt.request.url.includes("/api/posts")){
     evt.respondWith(
-      caches.open(TRANSACTION_CACHE).then(cache => {
+      caches.open(DATA_CACHE).then(cache => {
         return Promise.all(
           //fetch each thing inside the cache,
           // then clear it if we are online
@@ -88,7 +91,7 @@ self.addEventListener("fetch", function(evt) {
   // if file not added to cache upon installation, files can be added to cache in this function
   // see https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook#cache-falling-back-to-network
   evt.respondWith(
-    caches.match(evt.request).then(function(response) {
+    caches.match(evt.request).then((response) => {
       return response || fetch(evt.request);
     })
   );
