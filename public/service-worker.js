@@ -12,7 +12,6 @@ const FILES_TO_CACHE = [
 
 const STATIC_CACHE = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
-// const TRANSACTION_CACHE = "transaction-cache-v1";
 
 // installs service worker
 self.addEventListener("install", event => {
@@ -23,9 +22,8 @@ self.addEventListener("install", event => {
       .then(() => self.skipWaiting())
   );
 });
-// runs when serviceWorker is first started...
+// runs when serviceWorker first started...
 // removes old cache version keys
-// (this can stay the same for this assignment)
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     // caches.keys() returns all keys for cache versions
@@ -61,10 +59,7 @@ self.addEventListener("fetch", (event) => {
           .catch(err => {
             // Network request failed, try to get it from the cache.
             console.log(err, "Offline");
-            // // console.log(evt.request.url);
             // console.log(event.request);
-            // // storing a clone of the request in the cache
-            // cache.put(event.request.url, event.request.clone());
             return cache.match(event.request);
           });
       }).catch(err => console.log(err))
@@ -81,4 +76,3 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
-
