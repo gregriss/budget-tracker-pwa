@@ -1,9 +1,9 @@
-// console.log("This is your service worker speaking!");
-
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
   "/index.js",
+  "/db.js",
+  "https://cdn.jsdelivr.net/npm/chart.js@2.8.0",
   "/styles.css",
   "/manifest.webmanifest",
   "/assets/icons/icon-192x192.png",
