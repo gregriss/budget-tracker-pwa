@@ -26,7 +26,7 @@ function populateTotal() {
 
 function populateTable() {
   let tbody = document.querySelector("#tbody");
-  tbody.innerHTML = "";
+  tbody.innerHTML = '';
 
   transactions.forEach(transaction => {
     // create and populate a table row
